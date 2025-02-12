@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container">
+        <h1 class="mt-4">Students in {{ teaching_class.name }}</h1>
+
+        {% if students %}
+            <div class="row">
+                {% for student in students %}
+                    <div class="col-md-4 mb-3">
+                        <button class="btn btn-primary student-button" onclick="toggleOptions('options-{{ student.id }}')">
+                            {{ student.name }} (ID: {{ student.student_id }})
+                        </button>
+                        <div id="options-{{ student.id }}" class="options-container">
+                            <a href="{% url 'give_merit' student.id %}" class="btn btn-success btn-sm">Give Merit</a>
+                            <a href="{% url 'give_behavior_points' student.id %}" class="btn btn-danger btn-sm">Give Behavior Points</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p>No students in this class.</p>
+        {% endif %}
+    </div>
+
+    <style>
+        .student-button {
+            display: block;
+            width: 100%;
+            height: 100px;
+            font-size: 20px;
+            text-align: center;
+            border-radius: 10px;
+        }
+
+        .options-container {
+            display: none;
+            margin-top: 10px;
+        }
+
+        .btn-sm {
+            width: 100%;
+            margin-bottom: 5px;
+        }
+    </style>
+
+    <script>
+        function toggleOptions(id) {
+            var options = document.getElementById(id);
+            if (options.style.display === "none" || options.style.display === "") {
+                options.style.display = "block";
+            } else {
+                options.style.display = "none";
+            }
+        }
+    </script>
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container-fluid">
+        <h1 class="mt-4">Classes</h1>
+
+        {% if teachingClass %}
+            <div class="row">
+                {% for class in teachingClass %}
+                    <div class="col-md-4 mb-3 d-flex justify-content-start">
+                        <a href="{% url 'student_list' class.id %}" class="btn btn-primary class-button">{{ class.name }}</a>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p>No classes available.</p>
+        {% endif %}
+    </div>
+
+    <style>
+        .class-button {
+            display: flex;
+            justify-content: center; 
+            align-items: center; 
+            width: 85%; 
+            height: 400%; 
+            font-size: 50px;
+            text-align: center;
+            border-radius: 10px;
+        }
+
+        
+        .container-fluid {
+            padding-left: 150px;
+            padding-right: 50px;
+        }
+    </style>
+{% endblock %}

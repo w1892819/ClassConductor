@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Offcanvas Notch Toggle</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+  <style>
+    .notch-button {
+      position: fixed;
+      top: 50%;
+      left: 0;
+      transform: translateY(-50%);
+      background-color: #007bff;
+      color: white;
+      width: 20px;
+      height: 160px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 0 4px 4px 0;
+      cursor: pointer;
+      z-index: 1051; 
+      border: none;
+      transition: left 0.3s ease;
+    }
+
+    .notch-button:hover {
+      background-color: #0056b3;
+    }
+
+    .offcanvas {
+      transition: transform 0.3s ease;
+    }
+  </style>
+</head>
+<body>
+
+
+<button id="notchButton" class="notch-button" aria-controls="offcanvasExample">
+  ☰
+</button>
+
+
+<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="offcanvasExampleLabel">ClassConducter</h5>
+  </div>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid d-flex justify-content-center">
+      {% for item in navbar_items %}
+        <a class="btn btn-primary mx-1 w-100 tall-button" href="{{ item.url }}">{{ item.name }}</a>
+      {% endfor %}
+    </div>
+  </nav>
+  
+  
+  
+  
+  
+    
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  const notchButton = document.getElementById("notchButton");
+  const offcanvas = document.getElementById("offcanvasExample");
+
+  let isOffcanvasOpen = false;
+
+  
+  notchButton.addEventListener("click", () => {
+    if (isOffcanvasOpen) {
+      
+      offcanvas.classList.remove("show");
+      offcanvas.style.transform = "translateX(-100%)";
+      notchButton.style.left = "0"; 
+    } else {
+      
+      offcanvas.classList.add("show");
+      offcanvas.style.transform = "translateX(0)";
+      notchButton.style.left = "400px"; 
+    }
+    isOffcanvasOpen = !isOffcanvasOpen;
+  });
+
+  
+  offcanvas.style.transform = "translateX(-100%)";
+</script>
+</body>
+</html>
